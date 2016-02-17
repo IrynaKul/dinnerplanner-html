@@ -1,100 +1,7 @@
-//http://t4t5.github.io/sweetalert/ -- homepage for sweetalert
-
 //DinnerModel Object constructor
 var DinnerModel = function() {
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
-
-	this.setNumberOfGuests = function(num) {
-		var totalnum;
-		//gagga
-		//TODO Lab 2
-	}
-
-
-
-	// should return 
-	this.getNumberOfGuests = function() {
-		swal('work it!');
-		//instead of writing "alert('work it')" you can wrote swal('work it') to make it prettier
-		//TODO Lab 2
-	}
-	var work = this.getNumberOfGuests();
-	//alert(work);
-
-
-
-	//Returns the dish that is on the menu for selected type 
-	this.getSelectedDish = function(type) {
-		//TODO Lab 2
-	}
-
-	//Returns all the dishes on the menu.
-	this.getFullMenu = function() {
-		//TODO Lab 2
-	}
-
-	//Returns all ingredients for all the dishes on the menu.
-	this.getAllIngredients = function() {
-		//TODO Lab 2
-	}
-
-	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
-	this.getTotalMenuPrice = function() {
-		//TODO Lab 2
-	}
-
-	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
-	//it is removed from the menu and the new one added.
-	this.addDishToMenu = function(id) {
-		//TODO Lab 2 
-	}
-
-	//Removes dish from menu
-	this.removeDishFromMenu = function(id) {
-		//TODO Lab 2
-	}
-
-	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
-	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
-	//if you don't pass any filter all the dishes will be returned
-	this.getAllDishes = function (type,filter) {
-	  return $(dishes).filter(function(index,dish) {
-		var found = true;
-		if(filter){
-			found = false;
-			$.each(dish.ingredients,function(index,ingredient) {
-				if(ingredient.name.indexOf(filter)!=-1) {
-					found = true;
-				}
-			});
-			if(dish.name.indexOf(filter) != -1)
-			{
-				found = true;
-			}
-		}
-	  	return dish.type == type && found;
-	  });	
-	}
-
-	//function that returns a dish of specific ID
-	this.getDish = function (id) {
-	  for(key in dishes){
-			if(dishes[key].id == id) {
-				return dishes[key];
-			}
-		}
-	}
-
-
-	// the dishes variable contains an array of all the 
-	// dishes in the database. each dish has id, name, type,
-	// image (name of the image file), description and
-	// array of ingredients. Each ingredient has name, 
-	// quantity (a number), price (a number) and unit (string 
-	// defining the unit i.e. "g", "slices", "ml". Unit
-	// can sometimes be empty like in the example of eggs where
-	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 	var dishes = [{
 		'id':1,
 		'name':'French toast',
@@ -278,28 +185,6 @@ var DinnerModel = function() {
 			'price':4
 			}]
 		},{
-		'id':102,
-		'name':'MD 4',
-		'type':'main dish',
-		'image':'meatballs.jpg',
-		'description':"Here is how you make it... Lore ipsum...",
-		'ingredients':[{ 
-			'name':'ingredient 1',
-			'quantity':1,
-			'unit':'pieces',
-			'price':4
-			},{
-			'name':'ingredient 2',
-			'quantity':12,
-			'unit':'g',
-			'price':7
-			},{
-			'name':'ingredient 3',
-			'quantity':6,
-			'unit':'ml',
-			'price':4
-			}]
-		},{
 		'id':200,
 		'name':'Chocolat Ice cream',
 		'type':'dessert',
@@ -338,4 +223,181 @@ var DinnerModel = function() {
 		}
 	];
 
+	var menu=[2,100,200];
+	var menu2= new Array(3);
+	var dishMenu= new Array();
+	var menu_temp=[,100,];
+	var guests= 4;
+	var start="dessert";
+	var dishPriceArray = new Array();	
+	
+	this.setNumberOfGuests = function(num) {
+		//num=this.setNumberOfGuests();
+		num= guests;
+		return num;
+	};
+
+	// should return 
+	this.getNumberOfGuests = function() {
+		return num;
+	};
+	
+	this.getSelectedDish = function(type) {
+		//type = start;
+		for(var a = 0; a <= menu.length; a++){
+			for (var b = 0; b < $(dishes).length; b++) {
+
+				if(menu[a] == dishes[b].id){
+					if(type == dishes[b].type){
+						return dishes[b];
+					}
+				}	
+			}
+		}
+	}
+	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
+	//it is removed from the menu and the new one added.
+	this.addDishToMenu = function(id) {
+		if(id==1||id==2||id==3){
+			menu2.splice(0, 1, id);
+		}
+		if(id==100||id==101||id==102){
+			menu2.splice(1, 1, id);
+		}
+		if(id==200||id==201||id==202){
+			menu2.splice(2, 1, id);
+		}
+		
+	}
+
+	var jj1=this.addDishToMenu(1);
+	//alert("add "+jj1);
+	var jj2=this.addDishToMenu(2);
+	//alert("add "+jj2);
+	var jj3=this.addDishToMenu(108);
+	//alert("add "+jj3);
+	var jj4=this.addDishToMenu(101);
+	//alert("add "+jj4);
+	var jj5=this.addDishToMenu(202);
+	//alert("add "+jj5);
+
+	//Removes dish from menu
+	this.removeDishFromMenu = function(id) {
+		//id=2;
+		var index = menu2.indexOf(id);
+		if (index > -1) {
+    		menu2.splice(index, 1, "");
+		}
+		return menu2;
+	}
+
+	var jjb=this.removeDishFromMenu();
+	//alert(jjb);
+	//alert("remove "+menu2);
+	var jj6=this.addDishToMenu(1);
+	//alert("add "+jj6);
+
+	//Returns all the dishes on the menu.
+	this.getFullMenu = function() {
+		//return menu2;
+		for (var a = 0; a < menu.length; a++) {
+			for (var b = 0; b < $(dishes).length; b++) {
+				if (menu[a]== $(dishes)[b].id) {
+					dishMenu.splice(a, 1, $(dishes)[b].id);
+				}
+			}
+		}
+		return dishMenu;	
+	}
+	//alert(this.getFullMenu());
+
+
+	//Returns all ingredients for all the dishes on the menu.
+	this.getAllIngredients = function() {
+		var ingredArray= new Array();
+		for (var a = 0; a < menu_temp.length; a++) {
+			for (var b = 0; b < $(dishes).length; b++) {
+				if (menu_temp[a]== $(dishes)[b].id) {
+					for (var c = 0; c < $(dishes)[b].ingredients.length; c++){
+						var ingredient = $(dishes)[b].ingredients[c];
+						ingredArray.push(ingredient);
+					}
+				}
+			}
+		}
+		return ingredArray;
+
+	}
+	//alert(this.getAllIngredients());
+	
+
+	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
+	this.getTotalMenuPrice = function() {
+		//TODO Lab 2
+		//var totalPrice=0;
+		
+		for (var a = 0; a < menu.length; a++) {
+			for (var b = 0; b < $(dishes).length; b++) {
+				if (menu[a]==$(dishes)[b].id) {
+					//alert("in if");
+					var dishPrice=0;
+					for (var c = 0; c < $(dishes)[b].ingredients.length; c++){
+						dishPrice= dishPrice+ parseFloat(dishes[b].ingredients[c].price);
+						//alert("dishPrice" + dishPrice);
+					}
+					dishPriceArray.splice(a, 1, dishPrice);
+					//totalPrice= totalPrice + dishPrice;
+					//alert(totalPrice);
+					//return dishPrice;
+				}
+				
+			}
+		}
+		return dishPriceArray;
+		//return totalPrice;
+	}
+	//var bla=this.getTotalMenuPrice();
+	//alert(bla);
+
+	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
+	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
+	//if you don't pass any filter all the dishes will be returned
+	this.getAllDishes = function (type,filter) {
+	  return $(dishes).filter(function(index,dish) {
+		var found = true;
+		if(filter){
+			found = false;
+			$.each(dish.ingredients,function(index,ingredient) {
+				if(ingredient.name.indexOf(filter)!=-1) {
+					found = true;
+				}
+			});
+			if(dish.name.indexOf(filter) != -1)
+			{
+				found = true;
+			}
+		}
+	  	return dish.type == type && found;
+	  });	
+	}
+
+	//function that returns a dish of specific ID
+	this.getDish = function (id) {
+	  for(key in dishes){
+			if(dishes[key].id == id) {
+				return dishes[key];
+			}
+		}
+	}
+
+
+	// the dishes variable contains an array of all the 
+	// dishes in the database. each dish has id, name, type,
+	// image (name of the image file), description and
+	// array of ingredients. Each ingredient has name, 
+	// quantity (a number), price (a number) and unit (string 
+	// defining the unit i.e. "g", "slices", "ml". Unit
+	// can sometimes be empty like in the example of eggs where
+	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
+	
 }

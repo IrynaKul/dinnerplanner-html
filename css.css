@@ -1,0 +1,177 @@
+body {
+/*	background-color: #8AA236 !important;*/
+	/*background: url("http://thehappyhomeproject.com/wp-content/uploads/2015/04/happy-family.jpg");*/
+	margin: 0;
+}
+
+button {
+	background-color: orange;
+	margin-top: 10px;
+	padding-top: 2.5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border: solid #000;
+	border-width: 1 1px;
+}
+
+h7 {
+	margin-top: 0px;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+h8 {
+	margin-top: 0px;
+	font-size: 15px;
+}
+
+h9 {
+	margin-top: 0px;
+	font-size: 25px;
+}
+
+/*Gray Line*/
+hr.style { 
+  width: 95%;
+  height: 5px; 
+  border-style: solid; 
+  border-color: #8c8b8b; 
+  border-width: 2px 0 0 0; 
+} 
+
+#first_header {
+	position: relative;
+	background-color: orange;
+	height: 15vh;
+	opacity: 0.5;
+	margin-top: 0px;
+	padding: 25px;
+}
+
+#first_box {
+	position: relative;
+	background-color:rgba(255,255,255,0.5);
+	width: 45%;
+	margin-top: 10%;
+	padding: 2.5%;
+}
+
+#side_menu{
+	display: inline-table;
+	width: 15%;
+	height: 85.1vh;
+	padding: 10px;
+	background-color: gray;
+	float: left;
+}
+
+#second_header {
+	background-color: white;
+	display: inline-table;
+	padding: 20px;
+	float: left;
+	height: 20vh;
+	width: 85%;
+}
+
+#third_header {
+	background-color: lightyellow;
+	display: inline-block;
+	padding: 20px;
+	float: left;
+	height: 10vh;
+	width: 100%;
+}
+
+#view3{
+	background-color: white;
+	height: 65.1vh;
+	overflow-y: auto;
+	width: 85%;
+}
+
+#view4{
+	background-color: white;
+	height: 65.1vh;
+	overflow-y: auto;
+	width: 85%;
+}
+
+.dish_display{
+	display: inline-block;
+	width: 150px;
+	height: 250px;
+	overflow-y:scroll;
+	margin: 15px;
+	margin-top: 10%;
+	/*float: center;*/
+	background-color: white;
+}
+
+#display_money{
+	position: absolute;
+	width: 150px;
+	height: 220px;
+	/*margin: 15px;*/
+	margin-top: 15.5%;
+	/*background-color: lightblue;*/
+	left: 50%;
+	margin-left: 300px;
+  	border-style: solid; 
+  	border-color: #8c8b8b; 
+  	border-width: 0 0 0 2px;
+  	padding-left: 20px;
+  	padding-top: 14%;
+}
+
+#food_name{
+	background-color: lightgray;
+	padding: 5px;
+	margin-bottom: 15px;
+	font-size: 15px;
+}
+
+#ingridients_box {
+	background-color: orange;
+	display: inline-table;
+	float: right;
+	width: 50%;
+	height: auto;
+	padding: 20px;
+	margin-left: 20px;
+}
+
+#preparation_box2{
+	background-color: white;
+	display: block;
+	width: 60%;
+	float: right;
+	height: auto;
+	padding-left: 10%;
+	padding-right: 5%;
+}
+
+#dish_content2{
+	display: block;
+	float: left;
+	width: 37.5%;
+	margin-left:2.5%;
+	overflow:hidden;
+	background-color:lightgray;
+}
+
+.output{
+	display: inline-block;
+	margin-top: 2.5%;
+	float: right;
+	width: 100%;
+}
+
+table {
+    width: 100%
+}
+
+span{
+	padding: 40px;
+}
+
