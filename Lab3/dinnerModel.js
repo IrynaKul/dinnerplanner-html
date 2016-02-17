@@ -222,24 +222,33 @@ var DinnerModel = function() {
 			}]
 		}
 	];
-
-	var menu=[2,100,200];
+	var menu=[1,100,200];
 	var menu2= new Array(3);
 	var dishMenu= new Array();
 	var menu_temp=[,100,];
-	var guests= 4;
-	var start="dessert";
-	var dishPriceArray = new Array();	
-	
+	var guests= 0;
+	//var start="dessert";
+	var dishPriceArray = new Array();
+	var observerArray = new Array();
+
+	this.addObserver =function(observer) {
+		observerArray.push(observer);
+	};
+	var notifyObservers = function(obj) {
+		for(var i=0; i<this.observerArray.length; i++) {
+			observerArray[i].update(obj);
+		}	
+	};
+		
 	this.setNumberOfGuests = function(num) {
 		//num=this.setNumberOfGuests();
-		num= guests;
-		return num;
+		guests=num;
+		this.notifyObservers();
 	};
-
+	
 	// should return 
 	this.getNumberOfGuests = function() {
-		return num;
+		return guests;
 	};
 	
 	this.getSelectedDish = function(type) {
@@ -267,6 +276,7 @@ var DinnerModel = function() {
 		if(id==200||id==201||id==202){
 			menu2.splice(2, 1, id);
 		}
+		this.notifyObservers();
 		
 	}
 
@@ -283,12 +293,12 @@ var DinnerModel = function() {
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
-		//id=2;
+		id=2;
 		var index = menu2.indexOf(id);
 		if (index > -1) {
     		menu2.splice(index, 1, "");
 		}
-		return menu2;
+		this.notifyObservers();
 	}
 
 	var jjb=this.removeDishFromMenu();
