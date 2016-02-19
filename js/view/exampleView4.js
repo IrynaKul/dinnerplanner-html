@@ -14,4 +14,6 @@ var ExampleView4 = function (container,model) {
 	this.selected_dish.html(output);
 	this.total_price.html("SEK "+model.getTotalMenuPrice()[model.getFullMenu().indexOf(model.getSelectedDish("main dish").id)]);
 
+	model.addObserver(this);
+
 }

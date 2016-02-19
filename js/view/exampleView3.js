@@ -3,6 +3,7 @@ var ExampleView3 = function (container,model) {
 	this.food=container.find("#food");
 	var output= new Array();
 	
+	
 	for (var i = 0; i < model.getAllDishes("main dish").length; i++){
 		var div = document.createElement('div');
 		div.className = 'dish_display';
@@ -11,5 +12,7 @@ var ExampleView3 = function (container,model) {
 		div.innerHTML=output[i];
 		document.getElementById("food").appendChild(div);
 	}
+
+	model.addObserver(this);
 	
 }

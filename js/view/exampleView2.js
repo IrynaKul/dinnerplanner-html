@@ -18,6 +18,8 @@ var ExampleView2 = function (container,model) {
 	document.getElementById("list_of_dishes").innerHTML += table;
 	this.totalPrice.html("<div style='float:right;'>SEK   "+total_price+"</div>");
 
+	model.addObserver(this);
+
 
 
 }
