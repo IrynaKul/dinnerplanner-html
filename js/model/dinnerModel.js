@@ -222,18 +222,17 @@ var DinnerModel = function() {
 			}]
 		}
 	];
-	var menu=[1,100,200];
+	var menu=[,,];
 	var menu2= new Array(3);
 	var dishMenu= new Array();
-	var menu_temp=[,100,];
-	var guests= 0;
-	//var start="dessert";
+	//var menu_temp=[,100,];
+	var guests= 1;
 	var dishPriceArray = new Array();
 	var observerArray = new Array();
 
 	this.addObserver =function(observer) {
 		observerArray.push(observer);
-		alert("hello "+ observerArray);
+		//alert("hello "+ observerArray);
 	};
 	var notifyObservers = function(obj) {
 		for(var i=0; i<this.observerArray.length; i++) {
@@ -281,31 +280,30 @@ var DinnerModel = function() {
 		
 	}
 
-	var jj1=this.addDishToMenu(1);
-	//alert("add "+jj1);
-	var jj2=this.addDishToMenu(2);
-	//alert("add "+jj2);
-	var jj3=this.addDishToMenu(108);
-	//alert("add "+jj3);
-	var jj4=this.addDishToMenu(101);
-	//alert("add "+jj4);
-	var jj5=this.addDishToMenu(202);
-	//alert("add "+jj5);
+	// var jj1=this.addDishToMenu(1);
+	// //alert("add "+jj1);
+	// var jj2=this.addDishToMenu(2);
+	// //alert("add "+jj2);
+	// var jj3=this.addDishToMenu(108);
+	// //alert("add "+jj3);
+	// var jj4=this.addDishToMenu(101);
+	// //alert("add "+jj4);
+	// var jj5=this.addDishToMenu(202);
+	// //alert("add "+jj5);
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
-		id=2;
 		var index = menu2.indexOf(id);
 		if (index > -1) {
     		menu2.splice(index, 1, "");
 		}
 		this.notifyObservers;
 	}
-	var jjb=this.removeDishFromMenu();
-	//alert(jjb);
-	//alert("remove "+menu2);
-	var jj6=this.addDishToMenu(1);
-	//alert("add "+jj6);
+	// var jjb=this.removeDishFromMenu();
+	// //alert(jjb);
+	// //alert("remove "+menu2);
+	// var jj6=this.addDishToMenu(1);
+	// //alert("add "+jj6);
 
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
