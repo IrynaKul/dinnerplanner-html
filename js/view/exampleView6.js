@@ -1,7 +1,7 @@
 var ExampleView6 = function (container,model) {
 
 	this.numberOfGuests = container.find("#numberOfGuests_view6");
-	this.numberOfGuests.html("<div id='third_header'><h9>My Dinner: "+model.setNumberOfGuests()+" people"+"</h9><div style='float: right;'><button id='goBackBtn'>Go back and edit dinner</button></div>");
+	this.numberOfGuests.html("<div id='third_header'><h9>My Dinner: "+model.getNumberOfGuests()+" people"+"</h9><div style='float: right;'><button id='goBackBtn2'>Go back and edit dinner</button></div>");
 
 	var output= new Array();
 	var preparation_output = new Array();

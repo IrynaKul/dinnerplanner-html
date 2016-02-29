@@ -20,6 +20,7 @@ var View4Controller = function(view4, view3, view2, image_id, model ) {
 	for(var i=0; i<3; i++){
 		console.log('#'+300+i);
 		$("#dishBtn").on("click",function(){
+			console.log("in dishBtn");
 			alert("vg "+ this.value);
 			model.removeDishFromMenu(this.value);
 			//view.update();

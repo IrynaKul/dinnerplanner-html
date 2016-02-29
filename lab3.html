@@ -23,25 +23,29 @@
 			<h8>From the best chefs bla bla bla bla</h8>
 		</div>
 
-		<div id="first_box" background='http://thehappyhomeproject.com/wp-content/uploads/2015/04/happy-family.jpg' style="background-repeat: no-repeat; background-size: cover;">
-			<h9>A home dinner service</h9>
-			<hr class="style"/>
-			<text>masssssssa fucking test wefhwefweuf iwefuihw efhqw iuoehqowg oqwegy woefyg awoeifgywpaiefaisefayefgawfoyae fuas fuygas fuasygef auygefu asegf asuefy asuyefgayusefg ausyefg ausefgayusgefyuasgfe ausygefasuyegf aiuefga uyefg uaysgef uyaegf uaefgasefuygfua</text>
-			<br/>
-			<br/>
-			<br/>
-			Start QUICKLY
-			<br/>
-			<!-- <button type="button">Create new dinner</button> -->
-			<button id="createNewDinnerBtn">Create new dinner</button>
+		<div id="home_page">
+			<div id="first_box">
+				<h9>A home dinner service</h9>
+				<hr class="style"/>
+				<text>masssssssa fucking test wefhwefweuf iwefuihw efhqw iuoehqowg oqwegy woefyg awoeifgywpaiefaisefayefgawfoyae fuas fuygas fuasygef auygefu asegf asuefy asuyefgayusefg ausyefg ausefgayusgefyuasgfe ausygefasuyegf aiuefga uyefg uaysgef uyaegf uaefgasefuygfua</text>
+				<br/>
+				<br/>
+				<br/>
+				Start QUICKLY
+				<br/>
+				<!-- <button type="button">Create new dinner</button> -->
+				<button id="createNewDinnerBtn">Create new dinner</button>
+			</div>
 		</div>
 	    <div id="side_menu">
 	    	<b>My dinner</b>
 	    	<br/>
-	    	<text>People</text>
-			<div id="numberOfGuests"></div>
-			<br/>
-			<br/>
+	    	<div>
+        		Number of guests: <div id="numberOfGuests"></div>
+        		<button id="minusGuest" class="glyphicon glyphicon-minus"></button>
+        		<button id="plusGuest" class="glyphicon glyphicon-plus"></button>
+      		</div>
+      		<br />
 			<br/>
 			<div id="dish">
 				<table id='list_of_dishes' style="border-collapse: collapse; border: 2px;">
@@ -63,22 +67,23 @@
 
 			<hr class="style"/>
 
-			<form action="" method="get">
+			<!--<form>-->
 				<input id="specific_dish" type="text" placeholder="Enter key words" name="search"></input>
 				<button id="searchBtn">Search</button>
 				<span>
 					<select id="dishtype">
-						<option>Starters</option>
-						<option>Main</option>
-						<option>Dessert</option>
+						<option>starter</option>
+						<option>main dish</option>
+						<option>dessert</option>
 					</select>
 				</span>
-			</form>
+			<!--</form>-->
 		</div>
 
 	    <center>
 	    	<div id="view3">
 	    		<div id="food_view3"></div>
+	    		<div id="food"></div>
 	    	</div>
 	    </center>
 	   
@@ -91,7 +96,9 @@
 	        	<div id="total_price_view4" style='float: right;'></div>
 	      	</div>
 
-      		<div id="selected_dish" style="background-color:white; padding:15px; padding-left:40px;"></div>
+      		<div id="selected_dish" style="background-color:white; padding:15px; padding-left:40px;">
+      			<button id='back_to_select_dish'>Back to select dish</button>
+      		</div>
 
       	</div>
       	<div id = "view5">
@@ -103,7 +110,7 @@
       		<hr class="style"/>
 
       		<center>
-        		<button>Print full recipe</button>
+        		<button id="fullRecipeBtn">Print full recipe</button>
       		</center>
     	</div>
     	<div id="view6">
@@ -113,18 +120,27 @@
 		<!-- jQuery -->
 	    <script src="https://code.jquery.com/jquery.js"></script>
 	    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
-	    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	    <!--script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script-->
 
 		<!-- The application JavaScript code -->
 		<script src="js/app.js"></script>
 		<script src="js/model/dinnerModel.js"></script>
+		<script src="js/view/exampleView.js"></script>
+		<script src="js/Controller/View1Controller.js"></script>
 		<script src="js/view/exampleView2.js"></script>
-		<script src="js/view/exampleView3.js"></script>
-		<script src="js/view/exampleView4.js"></script>
-		<script src="js/view/exampleView5.js"></script>
-		<script src="js/view/exampleView6.js"></script>
 		<script src="js/Controller/View2Controller.js"></script>
-    	<script src="js/Controller/View3Controller.js"></script>
+		<script src="js/view/exampleView3.js"></script>
+		<script src="js/Controller/View3Controller1.js"></script>
+		<script src="js/Controller/View3Controller2.js"></script>
+		<script src="js/view/exampleView4.js"></script>
+		<script src="js/Controller/View4Controller.js"></script>
+		<script src="js/view/exampleView5.js"></script>
+		<script src="js/Controller/View5Controller.js"></script>
+		<script src="js/view/exampleView6.js"></script>
+		<script src="js/Controller/View6Controller.js"></script>
+		
+		
+    	
 		<!--script src="js/view/exampleViewController.js"></script-->
 	</body>
 	    

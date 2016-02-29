@@ -222,8 +222,7 @@ var DinnerModel = function() {
 			}]
 		}
 	];
-	var menu=[,,];
-	var menu2= new Array(3);
+	var menu= [0,0,0];
 	var dishMenu= new Array();
 	//var menu_temp=[,100,];
 	var guests= 1;
@@ -239,6 +238,15 @@ var DinnerModel = function() {
 			observerArray[i].update(obj);
 		}	
 	};
+
+	//function that returns a dish of specific ID
+	this.getDish = function (id) {
+	  for(key in dishes){
+			if(dishes[key].id == id) {
+				return dishes[key];
+			}
+		}
+	}
 		
 	this.setNumberOfGuests = function(num) {
 		//num=this.setNumberOfGuests();
@@ -264,40 +272,74 @@ var DinnerModel = function() {
 			}
 		}
 	}
+	//Returns all the dishes on the menu.
+	this.getFullMenu = function() {
+		return menu;
+		// for (var a = 0; a < menu.length; a++) {
+		// 	for (var b = 0; b < $(dishes).length; b++) {
+		// 		if (menu[a]== $(dishes)[b].id) {
+		// 			dishMenu.splice(a, 1, $(dishes)[b].id);
+		// 		}
+		// 	}
+		// }
+		// return dishMenu;	
+	}
+	//alert(this.getFullMenu());
+
+
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
-		if(id==1||id==2||id==3){
-			menu2.splice(0, 1, id);
+
+		if(this.getDish(id).type==="starter"){
+			if(menu[0]==undefined){
+				menu.push(id);
+			}
+			else{
+				menu.splice(0, 1, id);
+			}
 		}
-		if(id==100||id==101||id==102){
-			menu2.splice(1, 1, id);
+		if(this.getDish(id).type==="main dish"){
+			if(menu[1]==undefined){
+				menu.push(id);
+			}
+			else{
+				menu.splice(1, 1, id);
+			}
 		}
-		if(id==200||id==201||id==202){
-			menu2.splice(2, 1, id);
+		if(this.getDish(id).type==="dessert"){
+			if(menu[2]==undefined){
+				menu.push(id);
+			}
+			else{
+				menu.splice(2, 1, id);
+			}
 		}
 		this.notifyObservers;
+		console.log(this.getFullMenu());
 		
 	}
 
-	// var jj1=this.addDishToMenu(1);
-	// //alert("add "+jj1);
+	//alert("add "+jj1);
 	// var jj2=this.addDishToMenu(2);
 	// //alert("add "+jj2);
-	// var jj3=this.addDishToMenu(108);
+	//this.addDishToMenu(101);
 	// //alert("add "+jj3);
 	// var jj4=this.addDishToMenu(101);
 	// //alert("add "+jj4);
 	// var jj5=this.addDishToMenu(202);
 	// //alert("add "+jj5);
+	
+
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
-		var index = menu2.indexOf(id);
+		var index = menu.indexOf(id);
 		if (index > -1) {
-    		menu2.splice(index, 1, "");
+    		menu.splice(index, 1, "");
 		}
 		this.notifyObservers;
+		console.log(this.getFullMenu());
 	}
 	// var jjb=this.removeDishFromMenu();
 	// //alert(jjb);
@@ -305,27 +347,15 @@ var DinnerModel = function() {
 	// var jj6=this.addDishToMenu(1);
 	// //alert("add "+jj6);
 
-	//Returns all the dishes on the menu.
-	this.getFullMenu = function() {
-		//return menu2;
-		for (var a = 0; a < menu.length; a++) {
-			for (var b = 0; b < $(dishes).length; b++) {
-				if (menu[a]== $(dishes)[b].id) {
-					dishMenu.splice(a, 1, $(dishes)[b].id);
-				}
-			}
-		}
-		return dishMenu;	
-	}
-	//alert(this.getFullMenu());
+	
 
 
 	//Returns all ingredients for all the dishes on the menu.
 	this.getAllIngredients = function() {
 		var ingredArray= new Array();
-		for (var a = 0; a < menu_temp.length; a++) {
+		for (var a = 0; a < menu.length; a++) {
 			for (var b = 0; b < $(dishes).length; b++) {
-				if (menu_temp[a]== $(dishes)[b].id) {
+				if (menu[a]== $(dishes)[b].id) {
 					for (var c = 0; c < $(dishes)[b].ingredients.length; c++){
 						var ingredient = $(dishes)[b].ingredients[c];
 						ingredArray.push(ingredient);
@@ -389,14 +419,9 @@ var DinnerModel = function() {
 	  });	
 	}
 
-	//function that returns a dish of specific ID
-	this.getDish = function (id) {
-	  for(key in dishes){
-			if(dishes[key].id == id) {
-				return dishes[key];
-			}
-		}
-	}
+	
+
+	//console.log(this.getDish()[1]);
 
 
 	// the dishes variable contains an array of all the 
