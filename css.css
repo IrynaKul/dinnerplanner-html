@@ -38,6 +38,13 @@ hr.style {
   border-color: #8c8b8b; 
   border-width: 2px 0 0 0; 
 } 
+#home_page{
+	background: url("http://thehappyhomeproject.com/wp-content/uploads/2015/04/happy-family.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 85vh;
+	overflow:auto;
+}
 
 #first_header {
 	position: relative;
