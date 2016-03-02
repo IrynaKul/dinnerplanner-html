@@ -228,15 +228,18 @@ var DinnerModel = function() {
 	var guests= 1;
 	var dishPriceArray = new Array();
 	var observerArray = new Array();
+	var dish;
 
 	this.addObserver =function(observer) {
 		observerArray.push(observer);
+		console.log(observerArray);
 		//alert("hello "+ observerArray);
 	};
 	var notifyObservers = function(obj) {
-		for(var i=0; i<this.observerArray.length; i++) {
+		for(var i=0; i< observerArray.length; i++) {
 			observerArray[i].update(obj);
-		}	
+		}
+		
 	};
 
 	//function that returns a dish of specific ID
@@ -251,7 +254,9 @@ var DinnerModel = function() {
 	this.setNumberOfGuests = function(num) {
 		//num=this.setNumberOfGuests();
 		guests=num;
-		this.notifyObservers;
+		notifyObservers();
+		//notifyObservers(ExampleView2);
+		//notifyObservers(ExampleView4);
 	};
 	
 	// should return 
@@ -259,19 +264,25 @@ var DinnerModel = function() {
 		return guests;
 	};
 	
-	this.getSelectedDish = function(type) {
+	this.setSelectedDish = function(id) {
 		//type = start;
-		for(var a = 0; a <= menu.length; a++){
+		//for(var a = 0; a <= menu.length; a++){
 			for (var b = 0; b < $(dishes).length; b++) {
 
-				if(menu[a] == dishes[b].id){
-					if(type == dishes[b].type){
-						return dishes[b];
-					}
+				if(dishes[b].id==id){
+					//if(type == dishes[b].type){
+						dish=dishes[b];
+					//}
 				}	
 			}
-		}
+			notifyObservers();
+		//}
 	}
+
+	this.getSelectedDish = function() {
+		return dish;
+	}
+	//console.log(this.getSelectedDish(1));
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
 		return menu;
@@ -292,30 +303,18 @@ var DinnerModel = function() {
 	this.addDishToMenu = function(id) {
 
 		if(this.getDish(id).type==="starter"){
-			if(menu[0]==undefined){
-				menu.push(id);
-			}
-			else{
-				menu.splice(0, 1, id);
-			}
+			
+			menu.splice(0, 1, id);
 		}
 		if(this.getDish(id).type==="main dish"){
-			if(menu[1]==undefined){
-				menu.push(id);
-			}
-			else{
-				menu.splice(1, 1, id);
-			}
+			
+			menu.splice(1, 1, id);
+			
 		}
 		if(this.getDish(id).type==="dessert"){
-			if(menu[2]==undefined){
-				menu.push(id);
-			}
-			else{
-				menu.splice(2, 1, id);
-			}
+			menu.splice(2, 1, id);
 		}
-		this.notifyObservers;
+		notifyObservers();
 		console.log(this.getFullMenu());
 		
 	}
@@ -333,12 +332,21 @@ var DinnerModel = function() {
 
 
 	//Removes dish from menu
-	this.removeDishFromMenu = function(id) {
-		var index = menu.indexOf(id);
-		if (index > -1) {
-    		menu.splice(index, 1, "");
+	this.removeDishFromMenu = function(type) {
+		if (type == "starter"){
+			menu[0]=0;
 		}
-		this.notifyObservers;
+		if (type == "main dish"){
+			menu[1]=0;
+		}
+		if (type == "dessert"){
+			menu[2]=0;
+		}
+		// var index = menu.indexOf(id);
+		// if (index > -1) {
+  //   		menu.splice(index, 1, 0);
+		// }
+		notifyObservers();
 		console.log(this.getFullMenu());
 	}
 	// var jjb=this.removeDishFromMenu();

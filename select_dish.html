@@ -23,16 +23,25 @@
       <h8>From the best chefs bla bla bla bla</h8>
     </div>
     <div id="side_menu">
-      <b>My dinner</b>
+      <div>
+        Number of guests: <div id="numberOfGuests"></div>
+        <button id="minusGuest" class="glyphicon glyphicon-minus"></button>
+        <button id="plusGuest" class="glyphicon glyphicon-plus"></button>
+      </div>
+      <br />
+      <!--b>My dinner</b>
       <br/>
       <text>People</text>
       <div id="numberOfGuests"></div>
       <br/>
       <br/>
-      <br/>
+      <br/-->
       <div id="dish">
         <table id='list_of_dishes' style="border-collapse: collapse; border: 2px;">
           <tr style="background-color: lightgrey; border-style:solid; border-width:2px;"><td>Dish Name</td><td>Cost</td></tr>
+          <tr id="starter"></tr>
+          <tr id="main_dish"></tr>
+          <tr id="dessert"></tr>
         </table>
       </div>
       <hr class="style"/>
@@ -64,7 +73,7 @@
 
     <center>
       <div id="view3">
-        <div id="food"></div>
+        <div id="food_view3"></div>
       </div>
     </center>
 
@@ -79,6 +88,7 @@
     <script src="js/model/dinnerModel.js"></script>
     <script src="js/view/exampleView2.js"></script>
     <script src="js/view/exampleView3.js"></script>
-    <!--script src="js/view/exampleViewController.js"></script-->
+    <script src="js/Controller/View2Controller.js"></script>
+    <script src="js/Controller/View3Controller.js"></script>
   </body>
 </html>

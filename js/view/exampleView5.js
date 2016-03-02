@@ -9,18 +9,25 @@ var ExampleView5 = function (container,model) {
 
 	var output= new Array();
 	var total_price = 0;
-	
 
-	for (var i = 0; i < model.getFullMenu().length; i++){
-		var div = document.createElement('div');
-		div.className = 'dish_display';
+	var menuDishes = model.getFullMenu();
+	var dish;
+	for (var i = 0; i < menuDishes.length; i++){
+		dish = model.getDish(model.getFullMenu()[i]);
+		console.log(dish);
 
-		output.push("<img src="+"images/"+model.getDish(model.getFullMenu()[i]).image+
-			" height='140' width='140'/><div id='food_name'>"+model.getDish(model.getFullMenu()[i]).name+"</div><div>"
-			+model.getNumberOfGuests()*model.getTotalMenuPrice()[i]+"</div>");
-		div.innerHTML=output[i];
-		document.getElementById("food_view5").appendChild(div);
-		total_price += model.getNumberOfGuests()*model.getTotalMenuPrice()[i];
+		if (dish !== undefined) {
+			console.log("inuti if ",dish);
+			var div = document.createElement('div');
+			div.className = 'dish_display';
+
+			output.push("<img src="+"images/"+dish.image+
+				" height='140' width='140'/><div id='food_name'>"+dish.name+"</div><div>"
+				+model.getNumberOfGuests()*model.getTotalMenuPrice()[i]+"</div>");
+			div.innerHTML=output[i];
+			document.getElementById("food_view5").appendChild(div);
+			total_price += model.getNumberOfGuests()*model.getTotalMenuPrice()[i];
+		}
 	}
 
 	this.display_money.html("<div> Total:<br/>"+total_price+" SEK</div>");

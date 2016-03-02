@@ -48,9 +48,17 @@
       		<br />
 			<br/>
 			<div id="dish">
-				<table id='list_of_dishes' style="border-collapse: collapse; border: 2px;">
+				<div id="dishBtn">
+					<div id="starter"><input type="hidden" id="dishId_starter"/></div>
+					<div id="main_dish"><input type="hidden" id="dishId_main_dish"/></div>
+					<div id="dessert"><input type="hidden" id="dishId_dessert"/></div>
+				</div>
+				<!-- <table id='list_of_dishes' style="border-collapse: collapse; border: 2px;">
 					<tr style="background-color: lightgrey; border-style:solid; border-width:2px;"><td>Dish Name</td><td>Cost</td></tr>
-				</table>
+					<tr id="starter"></tr>
+					<tr id="main_dish"></tr>
+					<tr id="dessert"></tr>
+				</table> -->
 	      	</div>
 	      	<hr class="style"/>
 	      	<div id="totalPrice"></div>
@@ -97,6 +105,12 @@
 	      	</div>
 
       		<div id="selected_dish" style="background-color:white; padding:15px; padding-left:40px;">
+      			<div id="show_dish"></div>
+      			<br/>
+      			<br/>
+      			<h9>Preperation</h9>
+      			<br/>
+      			<div id="preperation"></div>
       			<button id='back_to_select_dish'>Back to select dish</button>
       		</div>
 

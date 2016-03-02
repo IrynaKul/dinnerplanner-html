@@ -1,29 +1,44 @@
-var View4Controller = function(view4, view3, view2, image_id, model ) {
-	$("#back_to_select_dish").click(function(){
+var View4Controller = function(view4, model ) {
+	console.log("i View4Controller");
+
+	$("#back_to_select_dish").click(function(event){
+		event.preventDefault();
 		$("#view4").hide();
 		$("#second_header").show();
 		$("#view3").show();
 		document.getElementById("ingredients_view4").innerHTML = "";
-		view3.update();
+		console.log("fuck life");
 
 	})
 
 	$("#confirmDishBtn").click(function(){
-		document.getElementById("list_of_dishes").innerHTML= "";
-		console.log(image_id);
-		model.addDishToMenu(image_id);
-		console.log(model.getFullMenu());
-		
-		view2.update();
+		document.getElementById("starter").innerHTML = "";
+		document.getElementById("main_dish").innerHTML = "";
+		document.getElementById("dessert").innerHTML = "";
+		// $("#starter_inside").remove();
+		// $("#main_dish_inside").remove();
+		// $("#dessert_inside").remove();
+		model.addDishToMenu(model.getSelectedDish().id);
+
 	})
 
-	for(var i=0; i<3; i++){
-		console.log('#'+300+i);
-		$("#dishBtn").on("click",function(){
-			console.log("in dishBtn");
-			alert("vg "+ this.value);
-			model.removeDishFromMenu(this.value);
-			//view.update();
-		})
-	}
+	$("#starter").on("click", function(){
+		document.getElementById("starter").innerHTML = "";
+		document.getElementById("main_dish").innerHTML = "";
+		document.getElementById("dessert").innerHTML = "";
+		model.removeDishFromMenu("starter");
+	})
+	$("#main_dish").on("click",function(){
+		document.getElementById("starter").innerHTML = "";
+		document.getElementById("main_dish").innerHTML = "";
+		document.getElementById("dessert").innerHTML = "";
+		model.removeDishFromMenu("main dish");
+	})
+	$("#dessert").on("click",function(){
+		document.getElementById("starter").innerHTML = "";
+		document.getElementById("main_dish").innerHTML = "";
+		document.getElementById("dessert").innerHTML = "";
+		model.removeDishFromMenu("dessert");
+	})
+
 }

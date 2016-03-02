@@ -8,13 +8,15 @@ var ExampleView6 = function (container,model) {
 	
 	
 	for (var i = 0; i < model.getFullMenu().length; i++){
-		var div = document.createElement('div');
-		div.className = 'output';
+		if (model.getFullMenu()[i]!==0) {
+			var div = document.createElement('div');
+			div.className = 'output';
 
-		preparation_output.push("<div id='preparation_box2'><h8><b>Preparation</b></h8><br/><br/>"+model.getDish(model.getFullMenu()[i]).description+"</div>");
-		output.push("<div id='dish_content2'><img src="+"images/"+model.getDish(model.getFullMenu()[i]).image+" style='float:left; margin-right:25px;'/><h9>"+model.getDish(model.getFullMenu()[i]).name+"</h9><br/><h8>Blaaaa bla cbskjs SDA,GDAWSD NSGDy hgaysgd hsdlSDG dcshgiwrl	 DYRYTELDGASD EHR	gd</h8></div>");
-		div.innerHTML=preparation_output[i]+output[i];
-		document.getElementById("food_view6").appendChild(div);
+			preparation_output.push("<div id='preparation_box2'><h8><b>Preparation</b></h8><br/><br/>"+model.getDish(model.getFullMenu()[i]).description+"</div>");
+			output.push("<div id='dish_content2'><img src="+"images/"+model.getDish(model.getFullMenu()[i]).image+" style='float:left; margin-right:25px;'/><h9>"+model.getDish(model.getFullMenu()[i]).name+"</h9><br/><h8>Blaaaa bla cbskjs SDA,GDAWSD NSGDy hgaysgd hsdlSDG dcshgiwrl	 DYRYTELDGASD EHR	gd</h8></div>");
+			div.innerHTML=preparation_output[i]+output[i];
+			document.getElementById("food_view6").appendChild(div);
+		}
 	}
 
 }

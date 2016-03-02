@@ -1,21 +1,19 @@
 var View1Controller = function(view, model) {
 	//console.log("i view1Controller");
-	
-	var ImageBtn= this.ImageBtn= function(view3,view2){
-		var view4Value=this.view4Value;
-		for (var i = 0; i < 3; i++){
-			console.log("i forloop");
-			$("#"+i).click(function(){
-				//console.log("i view3 click3 "+ this.value);
-				$("#second_header").hide();
-				$("#view3").hide();
-				$("#view4").show();
-				var exampleView4 = new ExampleView4($("#view4"),this.value,model);
-				view4Value=exampleView4;
-				var view4Controller = new View4Controller(exampleView4,view3,view2,this.value,model);
-			})
-		}
-	}
+	console.log("i view1Controller");
+	// var ImageBtn= this.ImageBtn= function(){
+	// 	for (var i = 0; i < 3; i++){
+	// 		console.log("i forloop");
+	// 		$("#"+i).click(function(){
+	// 			//console.log("i view3 click3 "+ this.value);
+	// 			$("#second_header").hide();
+	// 			$("#view3").hide();
+	// 			$("#view4").show();
+	// 			var exampleView4 = new ExampleView4($("#view4"),this.value,model);
+	// 			var view4Controller = new View4Controller(exampleView4,view3,view2,this.value,model);
+	// 		})
+	// 	}
+	// }
 
 	$("#createNewDinnerBtn").click(function(){
 		console.log("i click");

@@ -1,18 +1,15 @@
 //ExampleViewController Object constructor
-var View2Controller = function(view, view3, model, ImageBtn) {
+var View2Controller = function(view, model) {
+	console.log("i view2Controller");
  
 	view.plusButton.click(function(){
 		model.setNumberOfGuests(model.getNumberOfGuests() + 1);
-		document.getElementById("list_of_dishes").innerHTML= "";
-		view.update();
 	});
  
 	view.minusButton.click(function(){
 		if(model.getNumberOfGuests()>0){
 			model.setNumberOfGuests(model.getNumberOfGuests() - 1);
-			document.getElementById("list_of_dishes").innerHTML= "";
-			view.update();
-			//ImageBtn.view4Value.update();
+
 		}
 		else{
 			alert("False, you morot!");
