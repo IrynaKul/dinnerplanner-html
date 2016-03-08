@@ -7,33 +7,13 @@ $(function() {
 	$("#view5").hide();
 	$("#view6").hide();
 	
-	virgin = true;
+
 
 	var model = new DinnerModel();
-	// var ImageBtn = this.ImageBtn = function(view3,view2){
-	// 	if(virgin == true){
-	// 		console.log("IF");
-	// 		virgin = false;
-	// 	}
-	// 	var view4Value = this.view4Value;
-	// 	for (var i = 0; i < 3; i++){
-	// 		console.log("i forloop");
-	// 		$("#"+i).click(function(){
-	// 			//console.log("i view3 click3 "+ this.value);
-	// 			$("#second_header").hide();
-	// 			$("#view3").hide();
-	// 			$("#view4").show();
-	// 			console.log(exampleView4);
-	// 			var exampleView4 = new ExampleView4($("#view4"),this.value,model);
-	// 			var view4Controller = new View4Controller(exampleView4,view3,view2,this.value,model);
-	// 		})
-	// 	}
-	// }
-
+	model.setAllDishes(document.getElementById("dishtype").value,"");
 	
 
 	$("#createNewDinnerBtn").click(function(){
-		console.log("i click");
 		$("#home_page").hide();
 		$("#second_header").show();
 		$("#side_menu").show();
@@ -41,66 +21,13 @@ $(function() {
 		var exampleView2 = new ExampleView2($("#side_menu"),model);
 		var exampleView3 = new ExampleView3($("#view3"),model);
 		var exampleView4 = new ExampleView4($("#view4"),model);
+		var exampleView5 = new ExampleView5($("#view5"),model);
+		var exampleView6 = new ExampleView6($("#view6"),model);
 		var view2Controller = new View2Controller(exampleView2,model);
 		var view3Controller1 = new View3Controller1(exampleView3,exampleView4, model);
 		var view4Controller = new View4Controller(exampleView4,model);
-		
-		//var view3Controller2 = new View3Controller2(exampleView3,exampleView2, model,ImageBtn);
+		var view5Controller=new View5Controller(exampleView5, view3, model);
+		var view6Controller = new View6Controller(exampleView6, model);
+
 	});
-
-
-
-	
-	// $("#dishBtn").click(function(){
-	// 	console.log("in Delete Btn");
-	// 	console.log("vg "+ document.getElementById("dishId_main_dish").value);
-	// 		//model.removeDishFromMenu();
-	// 		//view2.update();
-	// })
-
-	// $("#starter").click(function(){
-	// 	var dishId=document.getElementById("dishId_starter").value
-	// 	console.log("in starter Delete" + dishId);
-	// 	model.removeDishFromMenu(dishId);
-	// })
-	
-	//var exampleView = new ExampleView($("#home_page"));
-	
-	// var ImageBtn= function(view3,view2){
-	// 	var view4Value=this.view4Value;
-	// 	for (var i = 0; i < 3; i++){
-	// 		console.log("i forloop");
-	// 		$("#"+i).click(function(){
-	// 			//console.log("i view3 click3 "+ this.value);
-	// 			$("#second_header").hide();
-	// 			$("#view3").hide();
-	// 			$("#view4").show();
-	// 			var exampleView4 = new ExampleView4($("#view4"),this.value,model);
-	// 			view4Value=exampleView4;
-	// 			console.log("view4Value "+view4Value.update());
-	// 			var view4Controller = new View4Controller(exampleView4,view3,view2,this.value,model);
-	// 		})
-	// 	}
-	// }
-	//var view1Controller = new View1Controller(exampleView,model);
-	
-	// // ---------------------------------- select_dish.html ---------------------------------------- 
-	// var exampleView2 = new ExampleView2($("#side_menu"),model);
-	// var view2Controller = new View2Controller(exampleView2,model);
-	// var exampleView3 = new ExampleView3($("#view3"),model);
-	// var view3Controller = new View3Controller(exampleView3,model);
-	// //alert(exampleView3.btn);
-	// // ---------------------------------- selected_dish.html -------------------------------------
-	// //var exampleView2 = new ExampleView2($("#side_menu"),model);
-	// var exampleView4 = new ExampleView4($("#view4"),model);
-
-	// // ---------------------------------dinner_overview.html --------------------------------------
-	// var exampleView5 = new ExampleView5($("#view5"),model);
-
-	// // --------------------------------dinner_preparation.html -------------------------------------
-	// var exampleView6 = new ExampleView6($("#view6"),model);
-	
-	// //if $("#submitInput").click(function(){});
-	
-
 });

@@ -1,7 +1,5 @@
 //ExampleViewController Object constructor
-var View2Controller = function(view, model) {
-	console.log("i view2Controller");
- 
+var View2Controller = function(view, model) { 
 	view.plusButton.click(function(){
 		model.setNumberOfGuests(model.getNumberOfGuests() + 1);
 	});
@@ -24,8 +22,6 @@ var View2Controller = function(view, model) {
 		$("#view3").hide();
 		$("#view4").hide();
 		$("#view5").show();
-		var exampleView5 = new ExampleView5($("#view5"),model);
-		var view5Controller=new View5Controller(exampleView5, view3, model);
 	})
 
 

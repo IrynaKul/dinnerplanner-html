@@ -10,37 +10,44 @@ var ExampleView4 = function (container,model) {
 	
 	var loadView = function() {
 		document.getElementById("ingredients_view4").innerHTML="";
-		console.log("Selected dish", model.getSelectedDish());
 		numberOfGuests.html("INGREDIENTS FOR "+model.getNumberOfGuests()+" PEOPLE"+"<hr class='style'/>");
 		if (typeof model.getSelectedDish() !== 'undefined') {
-		// 	var btnIdArray=[0];
-		// 	btnIdArray.splice(0,1,btnId);
-		// 	console.log(btnIdArray);
-		console.log(model.getSelectedDish());
-			show_dish.html("<h9>"+model.getSelectedDish().name +"</h9><br/><img src="+"images/"+
-							model.getSelectedDish().image+" height='240' width='240'/><br/>Blaaaa bla cbskjs SDA,GDAWSD NSGDy hgaysgd hsdlSDG dcshgiwrl	 DYRYTELDGASD EHR	gd");
-			preperation.html(model.getSelectedDish().description+"<br/>");
+			var dish=model.getDish();
+			show_dish.html("<h9>"+dish.Title +"</h9><br/><img src="+dish.ImageURL+" height='240' width='240'/><br/><div id='dish_description'>"+dish.Description+"</div>");
+			preperation.html(dish.Instructions+"<br/>");
 			var ingr_price=0;
-			for (var i = 0; i < model.getSelectedDish().ingredients.length; i++){
-				var table = "<tr><td>"+model.getNumberOfGuests()*model.getSelectedDish().ingredients[i].quantity+
-					"</td><td>"+model.getSelectedDish().ingredients[i].unit+
-					"</td><td>"+model.getSelectedDish().ingredients[i].name+
-					"</td><td>SEK</td><td>"+model.getNumberOfGuests()*model.getSelectedDish().ingredients[i].price+
+
+			for (var i = 0; i < dish.Ingredients.length; i++){
+				var table = "<tr><td>"+model.getNumberOfGuests()*dish.Ingredients[i].Quantity+
+					"</td><td>"+dish.Ingredients[i].Unit+
+					"</td><td>"+dish.Ingredients[i].Name+
+					"</td><td>SEK</td><td>"+model.getNumberOfGuests()*dish.Ingredients[i].Quantity+
 					"</td></tr>";
 				document.getElementById("ingredients_view4").innerHTML += table;
-				ingr_price +=model.getNumberOfGuests()*model.getSelectedDish().ingredients[i].price;
+				ingr_price +=model.getNumberOfGuests()*dish.Ingredients[i].Quantity;
 				total_price.html("SEK "+ ingr_price);
 			}
 		}
-		// if(btnIdArray[0]!==0){
-		// 	loadView(btnIdArray[0]);
-		// }
-		//selected_dish.html(output);
-	//this.total_price.html("SEK "+model.getTotalMenuPrice()[model.getFullMenu().indexOf(model.getSelectedDish("main dish").id)]);
 	}
+
 	// The observer update function, triggered by the model when there are changes
-	this.update = function() {
-		loadView();
+	this.update = function(data) {
+		this.dataThatIShow=[0];
+		if(data!==undefined){
+			if(data.length==undefined && data.length!=this.dataThatIShow.length||data=="dish"){
+				this.dataThatIShow=data;
+				loadView();
+			}
+			else if(data.length>this.dataThatIShow.length){
+
+			}
+			else if(data.length==this.dataThatIShow.length){
+				console.log("view 4 ska inte uppdateras");
+			}
+			else if(data=="error"){
+				alert("Error");
+			}
+		}
 	}
 	
 	model.addObserver(this);

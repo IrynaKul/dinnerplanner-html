@@ -47,9 +47,10 @@ hr.style {
 }
 
 #first_header {
+	overflow: auto;
 	position: relative;
 	background-color: orange;
-	height: 15vh;
+	height: 15%;
 	opacity: 0.5;
 	margin-top: 0px;
 	padding: 25px;
@@ -65,7 +66,7 @@ hr.style {
 
 #side_menu{
 	display: inline-table;
-	width: 15%;
+	width: 20%;
 	height: 85.1vh;
 	padding: 10px;
 	background-color: gray;
@@ -78,7 +79,7 @@ hr.style {
 	padding: 20px;
 	float: left;
 	height: 20vh;
-	width: 85%;
+	width: 80%;
 }
 
 #third_header {
@@ -94,14 +95,14 @@ hr.style {
 	background-color: white;
 	height: 65.1vh;
 	overflow-y: auto;
-	width: 85%;
+	width: 80%;
 }
 
 #view4{
 	background-color: white;
 	height: 65.1vh;
 	overflow-y: auto;
-	width: 85%;
+	width: 80%;
 }
 
 .dish_display{

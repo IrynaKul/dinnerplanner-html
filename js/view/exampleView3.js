@@ -1,39 +1,42 @@
 var ExampleView3 = function (container,model) {
-	var chosen_dish=document.getElementById("dishtype");
-	var dishtype = chosen_dish.options[chosen_dish.selectedIndex].value;
-	var specific_dish = document.getElementById("specific_dish").value;
+	var dataArray=new Array();
+
 	
-	var loadView3=function(dishtype,specific_dish) {
+	var loadView3=function() {
+	
+		document.getElementById("food_view3").innerHTML="";
 		var output= new Array();
-		if(specific_dish != ""){
-			for (var i = 0; i < model.getAllDishes(dishtype,specific_dish).length; i++){
+		var dishes=model.getAllDishes();
+			for (var i = 0; i < dishes.length; i++){
 				var div = document.createElement('div');
 				div.className = 'dish_display';
-				var dishes=model.getAllDishes(dishtype,specific_dish)[i];
-				output.push("<input id='"+i+"' value='"+dishes.id+"' type='image' src='"+"images/"+dishes.image
-							+"' height='140' width='140' /><div id='food_name'>"+dishes.name
-							+"</div><div id='description'>"+dishes.description+"</div>");
-				//output.splice(i,1,"<input id='"+i+"' value='"+dishes.id+"' type='image' src='"+"images/"+dishes.image+"' height='140' width='140' /><div id='food_name'>"+dishes.name+"</div><div id='description'>"+dishes.description+"</div>");
+				
+				output.push("<input type='image' id='"+i+"' value='"+dishes[i].RecipeID+"' src='"+dishes[i].ImageURL
+							+"' height='140' width='140' /><div id='food_name'>"+dishes[i].Title
+							+"</div><div id='rating'>StarRating "+Math.round(dishes[i].StarRating*10)/10+"</div>");
 				div.innerHTML=output[i];
 				document.getElementById("food_view3").appendChild(div);
 			}		
-		}
-		else{
-			for (var i = 0; i < model.getAllDishes(dishtype).length; i++){
-				var div = document.createElement('div');
-				div.className = 'dish_display';
-				var dishes=model.getAllDishes(dishtype)[i];
-				output.push("<input id='"+i+"' value='"+dishes.id+"' type='image' src='"+"images/"+dishes.image+"' height='140' width='140' /><div id='food_name'>"+dishes.name+"</div><div id='description'>"+dishes.description+"</div>");
-				div.innerHTML=output[i];
-				document.getElementById("food_view3").appendChild(div);
-			}
-		}
-
 	}
-	this.update = function(dishtype,specific_dish) {
-		loadView3(dishtype,specific_dish);
+	this.update = function(data) {
+		this.dataThatIShow=[0];
+		if(data!==undefined){
+			if(data.length && data.length!=this.dataThatIShow.length){
+				console.log("hahahaha");
+				this.dataThatIShow=data;
+				loadView3();
+			}
+			else if(data=="num"){
+				loadView3();
+			}
+			
+			else if(data=="error"){
+				alert("Error");
+			}
+		
+		}
 	}
 	
 	model.addObserver(this);
-	loadView3(dishtype,specific_dish);
+	loadView3();
 }

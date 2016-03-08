@@ -80,9 +80,19 @@
 				<button id="searchBtn">Search</button>
 				<span>
 					<select id="dishtype">
-						<option>starter</option>
-						<option>main dish</option>
-						<option>dessert</option>
+						
+						<option>Appetizers</option>
+						<option>Main Dish</option>
+						<option>Dessert</option>
+						<!-- <option>bread</option>
+						<option>breakfast</option>
+						<option>drinks</option>
+						<option>main%20dish</option>
+						<option>salad</option>
+						<option>side%20dish</option>
+						<option>soup</option>
+						<option>marinade</option>
+						<option>other</option> -->
 					</select>
 				</span>
 			<!--</form>-->
@@ -119,7 +129,11 @@
       		<div id="numberOfGuests_view5"></div>
       		<div id="display_money"></div>
       		<center>
-        		<div id="food_view5"></div>
+        		<div id="food_view5">
+        			<div id="starter_view5"><input type="hidden" id="dishId_starter"/></div>
+					<div id="main_dish_view5"><input type="hidden" id="dishId_main_dish"/></div>
+					<div id="dessert_view5"><input type="hidden" id="dishId_dessert"/></div>
+        		</div>
       		</center>
       		<hr class="style"/>
 
