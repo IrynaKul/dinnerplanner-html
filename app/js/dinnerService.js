@@ -4,8 +4,13 @@
 // service is created first time it is needed and then just reuse it
 // the next time.
 dinnerPlannerApp.factory('Dinner',function ($resource) {
+  console.log("i DinnerService");
   
-  var numberOfGuest = 2;
+  var numberOfGuest = 1;
+  var menu =[0,0,0];
+  var dishId;
+  var dishArray=[];
+  var dish;
 
 
   this.setNumberOfGuests = function(num) {
@@ -23,9 +28,114 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   // a bit to take the advantage of Angular resource service
   // check lab 5 instructions for details
 
+  //function that returns a dish of specific ID
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:'81mo405ZMQ5DCZT5M35ltt6xL8mFsMfT'});
+  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'81mo405ZMQ5DCZT5M35ltt6xL8mFsMfT'});
+
+  
+  this.setSelectedDish = function(id) {
+    dishId=id;
+  }
+
+  this.getSelectedDish = function() {
+    return dishId;
+  }
+  
+  //Returns all the dishes on the menu.
+  this.getFullMenu = function() {
+    return menu;
+  }
+  
+  this.setDish= function(dishVar){
+    dish=dishVar;
+  }
+
+  this.getDish= function(){
+    return dish;
+  }
 
 
+  //Adds the passed dish to the menu. If the dish of that type already exists on the menu
+  //it is removed from the menu and the new one added.
+  this.addDishToMenu = function(id) {
+    console.log(this.getDish().Category);
+    //console.log("Category ",this.getDish().Category);
+    if(this.getDish().Category==="Appetizers"){
+      
+      menu.splice(0, 1, id);
+    }
+    if(this.getDish().Category==="Main Dish"){
+      
+      menu.splice(1, 1, id);
+      
+    }
+    if(this.getDish().Category==="Desserts"){
+      menu.splice(2, 1, id);
+    }
+    console.log(this.getFullMenu());
+    
+  }
+    //console.log("Category ",this.getDish().Category);
+    
+    // if(menu.length<=3 && menu.indexOf(id)==-1){
+    //   menu.push(id);
+    // }
+    // console.log(this.getFullMenu());
+  // this.addDishToMenu(530115);
+  // this.addDishToMenu(530114);
+  // this.addDishToMenu(530115);
+  // this.setSelectedDish(530115);
+  // this.dishArrayReturn();
 
+  
+
+
+  //Removes dish from menu
+  this.removeDishFromMenu = function(type) {
+    if (type == "starter"){
+      menu[0]=0;
+    }
+    if (type == "main dish"){
+      menu[1]=0;
+    }
+    if (type == "dessert"){
+      menu[2]=0;
+    }
+  }
+
+  this.setDishArray=function(dish){
+    var dishPrice=0;
+    for(var j=0; j<dish.Ingredients.length; j++){
+      dishPrice=dishPrice+dish.Ingredients[j].Quantity;
+    }
+    
+    dishArray.push({id:dish.RecipeID,
+            title:dish.Title,
+            category: dish.Category,
+            image:dish.ImageURL,
+            description:dish.Description,
+            instructions:dish.Instructions,
+            price:dishPrice});
+    console.log(dishArray);
+  }
+
+  this.getDishArray = function(){
+    return dishArray;
+  }
+  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
+  this.getTotalMenuPrice = function() {
+    var menuPrice =0;
+    for (var i = 0; i<priceArray.length; i++) {
+      for(var j=0; j<menu.length; j++){
+        if(menu[j]!==0 && menu[j]==priceArray[i].id){
+          menuPrice += priceArray[i].price;
+        }
+
+      }
+      
+    }
+    return menuPrice;
+  }
 
   // Angular service needs to return an object that has all the
   // methods created in it. You can consider that this is instead
