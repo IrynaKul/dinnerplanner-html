@@ -1,0 +1,32 @@
+
+
+<div id="numberOfGuests_view5">
+  <div id='third_header'>
+    <h9>My Dinner: {{getNumberOfGuests()}} people</h9>
+      <div style='float: right;'>
+      <div class="">
+        <a ng-href="#/search" id="back-btn" type="button">Back to Select Dish</a>
+      </div>
+  </div>
+</div>
+<div id="display_money">{{getNumberOfGuests()*totalMenuPrice}} SEK</div>
+<center>
+	<div id="food_view5" ng-repeat="id in fullMenu() track by $index">
+    <div ng-if="id != 0">
+      <div class="dish_display">
+        <img ng-src="{{getDish(id).image}}" height='140' width='140'/>
+        <div class="food_name">{{getDish(id).title}}</div>
+        <div>{{getNumberOfGuests()*getDish(id).price}}</div>
+      </div>
+    </div>
+	</div>
+</center>
+<hr class="style"/>
+
+<center>
+  <div class="">
+    <a ng-href="#/preparation">
+  	 <button id="fullRecipeBtn">Print full recipe</button>
+    </a>
+  </div>
+</center>

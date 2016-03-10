@@ -17,10 +17,20 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
 	
 	// TODO in Lab 5: Implement the methods to get the dinner menu
 	// add dish to menu and get total menu price
+  	$scope.addDishToMenu = function(dish_id) {
+  		Dinner.addDishToMenu(dish_id);
+  	}
 
-	$scope.addDishToMenu = function(){
-		Dinner.addDishToMenu("nånting");
-	}
+  	$scope.fullMenu = function() {
+  		return Dinner.getFullMenu();
+  	}
+
+  	$scope.getDish= function(id){
+  		Dinner.setSelectedDish(id);
+  		return Dinner.getSelectedDish();
+  	}
+  	$scope.totalMenuPrice= Dinner.getTotalMenuPrice();
+  	//http://localhost:8000/#/dish/167511	
 
 	//Returns all the dishes on the menu.
 	// $scope.getFullMenu = function() {

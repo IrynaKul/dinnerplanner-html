@@ -7,7 +7,7 @@ Instructions, Ingredients and total cost. -->
 	<div id="ingridients_box">
 		<div id="numberOfGuests_view4"></div>
 		<table id="ingredients_view4">
-			<tr ng-repeat="ingredient in dish.Ingredients">
+			<tr ng-repeat="ingredient in selectedDish.Ingredients">
 				<td>{{ingredient.Quantity}}</td>
 				<td>{{ingredient.Unit}}</td>
 				<td>{{ingredient.Name}}</td>
@@ -16,24 +16,26 @@ Instructions, Ingredients and total cost. -->
 			</tr>
 		</table>
 		<hr class="style"/>
-		<button id="confirmDishBtn">confirm dish</button>
+		<div ng-controller="DinnerCtrl">
+			<a ng-href="#/search" ng-click="addDishToMenu(selectedDish.RecipeID)" type="button">Confirm Dish</a>
+		</div>
 		<div id="total_price_view4" style='float: right;'></div>
 	</div>
 
 	<div id="selected_dish" style="background-color:white; padding:15px; padding-left:40px;">
 		<div id="show_dish">
-			<h9>{{dish.ImageURL}}</h9>
+			<img ng-src="{{selectedDish.ImageURL}}" height='240' width='240'/>
 			<br/>
-			<img ng-src="{{dish.ImageURL}}" height='240' width='240'/>
-			<br/>
-			<div id='dish_description'>{{dish.Description}}</div>
+			<div id='dish_description'>{{selectedDish.Description}}</div>
 		</div>
 		<br/>
 		<br/>
 		<h9>Preperation</h9>
 		<br/>
-		<div id="preperation">{{dish.Instructions}}</div>
-		<button id='back_to_select_dish'>Back to select dish</button>
+		<div id="preperation">{{selectedDish.Instructions}}</div>
+		<div class="">
+			<a ng-href="#/search" id="back-btn" type="button">Back to Select Dish</a>
+		</div>
 	</div>
 </div>
 

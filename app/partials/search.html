@@ -5,24 +5,25 @@ not support it in free version) and list all the dishes that match the search. -
 
 <div id="second_header">
 	<b>Select dish</b>
-
 	<hr class="style"/>
-
 	<!--<form>-->
 	<input ng-model="query"/>
 	<button ng-click="search(query)">Find</button>
 	{{status}}
+	<input type="button" ng-click="search('Appetizers')" value="Starter"></input>
+	<input type="button" ng-click="search('Main Dish')" value="Main Dish"></input>
+	<input type="button" ng-click="search('Desserts')" value="Dessert"></input>
 </div>
 <center>
     <div id="view3">
 		<div id="food_view3" >
-			<!-- <div ng-repeat="dish in dishes"> -->
-				<div ng-repeat="dish in dishes" ng-href="#/dish/{{dish.RecipeID}}" style="display:inline-block; float:left;">
+			<div ng-repeat="dish in dishes">
+				<a ng-href="#/dish/{{dish.RecipeID}}" type="button">
 					<img ng-src="{{dish.ImageURL}}" height='140' width='140' />
 					<div id='food_name'>{{dish.Title}}</div>
 					<div id='extra'>{{dish.Category}} {{dish.Subcategory}}</div>
-				</div>
-			<!-- </div> -->
+				</a>
+			</div>
 		</div>
 	</div>
 </center>

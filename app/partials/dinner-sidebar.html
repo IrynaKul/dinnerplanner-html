@@ -5,27 +5,23 @@
 		Number of guests: <input type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)"/>
 		</div>
 		<br />
-		Total number of 8888 guest: {{getNumberOfGuests()}}
 	<br/>
 	<div id="showDish">
-		<div id="dishBtn">
-			<div id="starter"><input type="hidden" id="dishId_starter"/></div>
-			<div id="main_dish"><input type="hidden" id="dishId_main_dish"/></div>
-			<div id="dessert"><input type="hidden" id="dishId_dessert"/></div>
+		<div id="dishBtn" ng-repeat="id in fullMenu() track by $index">
+			<div ng-if="id != 0">
+				<div id="dish_in_menu">{{getDish(id).title}}<span>{{getNumberOfGuests()}} X {{getDish(id).price}}</span>
+			</div>
 		</div>
-		<!-- <table id='list_of_dishes' style="border-collapse: collapse; border: 2px;">
-			<tr style="background-color: lightgrey; border-style:solid; border-width:2px;"><td>Dish Name</td><td>Cost</td></tr>
-			<tr id="starter"></tr> 
-			<tr id="main_dish"></tr>
-			<tr id="dessert"></tr>
-		</table> -->
+
   	</div>
   	<hr class="style"/>
-  	<div id="totalPrice"></div>
+  	<div id="totalPrice">{{getNumberOfGuests()*totalMenuPrice}} SEK</div>
   	<br/>
   	<br/>
   	<center>
-    	<button id="confirmDinnerBtn">Confirm dinner</button>
+ 		<a ng-href="#/overview">
+    		<button id="confirmDinnerBtn">Confirm dinner</button>
+    	</a>
   	</center>
 </div>
 
