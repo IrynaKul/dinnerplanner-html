@@ -1,0 +1,25 @@
+<div id="numberOfGuests_view6">
+	<div id='third_header'>
+    <h9>My Dinner: {{getNumberOfGuests()}} people</h9>
+	  <div class="" style='float: right;'>
+	    <a ng-href="#/search" id="back-btn" type="button">Go back and edit dinner</a>
+	  </div>
+</div>
+<div id="food_view6" ng-repeat="id in fullMenu() track by $index">
+	<div ng-if="id != 0">
+		<div class="output">
+			<div id='preparation_box2'>
+				<h8><b>Preparation</b></h8>
+				<br/>
+				<br/>
+				{{getDish(id).instructions}}
+			</div>
+			<div id='dish_content2'>
+				<img src="{{getDish(id).image}}" height='140' style='float:left; margin-right:25px;'/>
+				<h9>{{getDish(id).title}}</h9>
+				<br/>
+				<h8>{{getDish(id).description}}</h8>
+			</div>
+		</div>
+	</div>
+</div>

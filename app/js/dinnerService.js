@@ -3,25 +3,93 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource) {
+dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
   console.log("i DinnerService");
+
+  //var api_keys=[sV1fPGQKrO0b6oUYb6w9kLI8BORLiWox, 8vtk7KykflO5IzB96kb0mpot0sU40096,r02x0R09O76JMCMc4nuM0PJXawUHpBUL,81mo405ZMQ5DCZT5M35ltt6xL8mFsMfT};
+
+  //function that returns a dish of specific ID
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:'r02x0R09O76JMCMc4nuM0PJXawUHpBUL'});
+  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'r02x0R09O76JMCMc4nuM0PJXawUHpBUL'});
   
-  var numberOfGuest = 1;
-  var menu =[0,0,0];
+  
   var dishId;
   var dishArray=[];
   var dish;
   var returnDish;
   var menuPrice;
 
-  //var api_keys=[sV1fPGQKrO0b6oUYb6w9kLI8BORLiWox, 8vtk7KykflO5IzB96kb0mpot0sU40096,r02x0R09O76JMCMc4nuM0PJXawUHpBUL,81mo405ZMQ5DCZT5M35ltt6xL8mFsMfT};
+  //setting default values of numberOfGuests if cookies not exist yet
+  var numberOfGuests = $cookieStore.get('numberOfGuests');
+  if(typeof numberOfGuests== 'undefined'){
+    numberOfGuests=1;
+    $cookieStore.put('numberOfGuests',numberOfGuests);
+    console.log(numberOfGuests);
+  }
+
+  //function that fill the dishArray with needed values
+  var setDishArray= this.setDishArray=function(dish){
+    var dishPrice=0;
+    for(var j=0; j<dish.Ingredients.length; j++){
+      dishPrice=dishPrice+dish.Ingredients[j].Quantity;
+    }
+    
+    dishArray.push({id:dish.RecipeID,
+            title:dish.Title,
+            category: dish.Category,
+            image:dish.ImageURL,
+            description:dish.Description,
+            instructions:dish.Instructions,
+            price: Math.round(dishPrice)});
+  }
+
+  var menu=[];
+  var starter = $cookieStore.get('starter');
+  var main_dish = $cookieStore.get('main_dish');
+  var dessert = $cookieStore.get('dessert');
+  console.log("starter ", typeof starter, "main_dish ", main_dish, "dessert", dessert);
+
+  if(typeof starter == 'undefined'){
+    menu.push(0);
+    $cookieStore.put('starter',0);
+  }
+  if(typeof main_dish == 'undefined'){
+    menu.push(0);
+    $cookieStore.put('main_dish',0);
+  }
+  if(typeof dessert == 'undefined'){
+    menu.push(0);
+    $cookieStore.put('dessert',0);
+  }
+  else{
+    menu=[starter,main_dish,dessert];
+    for(key in menu) {
+      console.log(key);
+      if(menu[key]!=0){
+        this.Dish.get({id:menu[key]},function(data){
+        setDishArray(data);
+        });
+      }
+      
+    }
+  }
+  console.log(menu);
+
+  
 
   this.setNumberOfGuests = function(num) {
-    numberOfGuest = num;
+    if(num>0){
+      numberOfGuests = num;
+      $cookieStore.put('numberOfGuests',numberOfGuests);
+    }
+    else{
+      console.log("You can't have negative amount guests");
+    }
+    
   }
 
   this.getNumberOfGuests = function() {
-    return numberOfGuest;
+    return numberOfGuests;
   }
 
 
@@ -31,9 +99,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   // a bit to take the advantage of Angular resource service
   // check lab 5 instructions for details
 
-  //function that returns a dish of specific ID
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:'r02x0R09O76JMCMc4nuM0PJXawUHpBUL'});
-  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'r02x0R09O76JMCMc4nuM0PJXawUHpBUL'});
+  
   
   //Returns all the dishes on the menu.
   this.getFullMenu = function() {
@@ -48,24 +114,19 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
     return dish;
   }
 
-  this.setDishArray=function(dish){
-    var dishPrice=0;
-    for(var j=0; j<dish.Ingredients.length; j++){
-      dishPrice=dishPrice+dish.Ingredients[j].Quantity;
-    }
-    
-    dishArray.push({id:dish.RecipeID,
-            title:dish.Title,
-            category: dish.Category,
-            image:dish.ImageURL,
-            description:dish.Description,
-            instructions:dish.Instructions,
-            price:dishPrice});
-    //console.log("dishArray ",dishArray);
-  }
 
   this.getDishArray = function(){
     return dishArray;
+  }
+
+  this.getDishPrice =function(id){
+    for(key in dishArray){
+      if(id==dishArray[key].id){
+        console.log(dishArray[key].price);
+        return dishArray[key].price;
+      }
+    }
+
   }
 
   this.setSelectedDish= function(dishVar){
@@ -88,43 +149,36 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
     if(this.getDish().Category==="Appetizers"){
       
       menu.splice(0, 1, id);
+      $cookieStore.put('starter',id);
     }
     if(this.getDish().Category==="Main Dish"){
       
       menu.splice(1, 1, id);
+      $cookieStore.put('main_dish',id);
       
     }
     if(this.getDish().Category==="Desserts"){
       menu.splice(2, 1, id);
+      $cookieStore.put('dessert',id);
     }
     console.log(this.getFullMenu());
     
-  }
-    //console.log("Category ",this.getDish().Category);
     
-    // if(menu.length<=3 && menu.indexOf(id)==-1){
-    //   menu.push(id);
-    // }
-    // console.log(this.getFullMenu());
-  // this.addDishToMenu(530115);
-  // this.addDishToMenu(530114);
-  // this.addDishToMenu(530115);
-  // this.setSelectedDish(530115);
-  // this.dishArrayReturn();
-
-  
-
-
+  }
+   
   //Removes dish from menu
   this.removeDishFromMenu = function(type) {
-    if (type == "starter"){
+    if (type == "Appetizers"){
       menu[0]=0;
+      $cookieStore.remove('starter');
     }
-    if (type == "main dish"){
+    if (type == "Main Dish"){
       menu[1]=0;
+      $cookieStore.remove('main_dish');
     }
-    if (type == "dessert"){
+    if (type == "Desserts"){
       menu[2]=0;
+      $cookieStore.remove('dessert');
     }
   }
 
@@ -137,6 +191,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
         if(menu[j]!==0 && menu[j]==dishArray[i].id){
           menuPrice += dishArray[i].price;
         }
+        console.log("menuPrice ",menuPrice);
 
       }
       

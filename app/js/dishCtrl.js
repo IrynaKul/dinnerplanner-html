@@ -11,11 +11,16 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
     	$scope.selectedDish = data;
     	$scope.status = "";
     	console.log("data ",data);
+      console.log("id ", typeof data.RecipeID);
     	Dinner.setDish(data);
     	Dinner.setDishArray(data);
 	},function(data){
      	$scope.status = "There was an error";
    	});
+
+  $scope.dishPrice= function(id){
+    return Dinner.getDishPrice(id);
+  }
 
    	// $scope.comfirm_dish= function(dish_id){
    	// 	console.log("hej");

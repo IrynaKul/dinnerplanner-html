@@ -9,7 +9,9 @@
 	<div id="showDish">
 		<div id="dishBtn" ng-repeat="id in fullMenu() track by $index">
 			<div ng-if="id != 0">
-				<div id="dish_in_menu">{{getDish(id).title}}<span>{{getNumberOfGuests()}} X {{getDish(id).price}}</span>
+				<div ng-click="removeDishFromMenu(getDish(id).category)">
+					<div id="dish_in_menu">{{getDish(id).title}}<span>{{getNumberOfGuests()}} X {{getDish(id).price}}</span></div>
+				</div>
 			</div>
 		</div>
 

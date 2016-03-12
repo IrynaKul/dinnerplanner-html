@@ -19,7 +19,7 @@ Instructions, Ingredients and total cost. -->
 		<div ng-controller="DinnerCtrl">
 			<a ng-href="#/search" ng-click="addDishToMenu(selectedDish.RecipeID)" type="button">Confirm Dish</a>
 		</div>
-		<div id="total_price_view4" style='float: right;'></div>
+		<div id="total_price_view4" style='float: right;'>{{dishPrice(selectedDish.RecipeID)}}</div>
 	</div>
 
 	<div id="selected_dish" style="background-color:white; padding:15px; padding-left:40px;">
