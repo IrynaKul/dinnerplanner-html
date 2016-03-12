@@ -4,7 +4,9 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
 	console.log("i DinnerCtrl");
 
 	$scope.numberOfGuests = Dinner.getNumberOfGuests();
-	$scope.totalMenuPrice= Dinner.getTotalMenuPrice();
+	$scope.totalMenuPrice= function(){
+		return Dinner.getTotalMenuPrice();
+	}
 
 
 	$scope.setNumberOfGuest = function(number){
@@ -24,7 +26,7 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
 
   	$scope.removeDishFromMenu = function(type){
   		Dinner.removeDishFromMenu(type);
-  		$scope.totalMenuPrice= Dinner.getTotalMenuPrice();
+  		$scope.totalMenuPrice();
   	}
 
   	$scope.fullMenu = function() {
@@ -35,7 +37,6 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
   		Dinner.setSelectedDish(id);
   		return Dinner.getSelectedDish();
   	}
-
   	
   	//http://localhost:8000/#/dish/167511	
 

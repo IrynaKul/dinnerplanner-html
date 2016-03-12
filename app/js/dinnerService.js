@@ -12,12 +12,20 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
   this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:'r02x0R09O76JMCMc4nuM0PJXawUHpBUL'});
   this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'r02x0R09O76JMCMc4nuM0PJXawUHpBUL'});
   
-  
+  //$cookieStore.remove("totalPrice");
   var dishId;
   var dishArray=[];
   var dish;
   var returnDish;
-  var menuPrice;
+
+  $cookieStore.remove('menuPrice');
+
+  //var menuPrice= $cookieStore.get('totalPrice');
+
+  // if(typeof menuPrice == 'undefined'){
+  //   menuPrice=0;
+  //   $cookieStore.put('totalPrice', menuPrice);
+  // }
 
   //setting default values of numberOfGuests if cookies not exist yet
   var numberOfGuests = $cookieStore.get('numberOfGuests');
@@ -33,7 +41,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
     for(var j=0; j<dish.Ingredients.length; j++){
       dishPrice=dishPrice+dish.Ingredients[j].Quantity;
     }
-    
+  
     dishArray.push({id:dish.RecipeID,
             title:dish.Title,
             category: dish.Category,
@@ -41,30 +49,45 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
             description:dish.Description,
             instructions:dish.Instructions,
             price: Math.round(dishPrice)});
+    
+    
+    console.log("dishArray ", dishArray, dishArray.length);
+    
+    
   }
+
+  this.getDishArray = function(){
+    return dishArray;
+  }
+
+
+  
+
 
   var menu=[];
   var starter = $cookieStore.get('starter');
   var main_dish = $cookieStore.get('main_dish');
   var dessert = $cookieStore.get('dessert');
-  console.log("starter ", typeof starter, "main_dish ", main_dish, "dessert", dessert);
+  console.log("starter ", typeof starter, "main_dish ", typeof main_dish, "dessert", typeof dessert);
 
   if(typeof starter == 'undefined'){
-    menu.push(0);
+    console.log("in if starter ",starter);
+    starter=0;
     $cookieStore.put('starter',0);
   }
   if(typeof main_dish == 'undefined'){
-    menu.push(0);
+    console.log("in if main_dish ",main_dish);
+    main_dish=0;
     $cookieStore.put('main_dish',0);
   }
   if(typeof dessert == 'undefined'){
-    menu.push(0);
+    console.log("in if dessert ",dessert);
+    dessert=0;
     $cookieStore.put('dessert',0);
   }
   else{
     menu=[starter,main_dish,dessert];
     for(key in menu) {
-      console.log(key);
       if(menu[key]!=0){
         this.Dish.get({id:menu[key]},function(data){
         setDishArray(data);
@@ -73,9 +96,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
       
     }
   }
-  console.log(menu);
-
-  
+  console.log(menu); 
 
   this.setNumberOfGuests = function(num) {
     if(num>0){
@@ -83,7 +104,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
       $cookieStore.put('numberOfGuests',numberOfGuests);
     }
     else{
-      console.log("You can't have negative amount guests");
+      alert("You can't have negative amount guests");
     }
     
   }
@@ -114,15 +135,9 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
     return dish;
   }
 
-
-  this.getDishArray = function(){
-    return dishArray;
-  }
-
   this.getDishPrice =function(id){
     for(key in dishArray){
       if(id==dishArray[key].id){
-        console.log(dishArray[key].price);
         return dishArray[key].price;
       }
     }
@@ -165,7 +180,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
     
     
   }
-   
+    
   //Removes dish from menu
   this.removeDishFromMenu = function(type) {
     if (type == "Appetizers"){
@@ -180,24 +195,27 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
       menu[2]=0;
       $cookieStore.remove('dessert');
     }
+
   }
 
-
-  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
-  this.getTotalMenuPrice = function() {
-    var menuPrice =0;
-    for (var i = 0; i<dishArray.length; i++) {
-      for(var j=0; j<menu.length; j++){
-        if(menu[j]!==0 && menu[j]==dishArray[i].id){
-          menuPrice += dishArray[i].price;
+//Returns the total price of the menu (all the ingredients multiplied by number of guests).
+  var getTotalMenuPrice= this.getTotalMenuPrice = function() {
+    menuPrice =0;
+    for(i in menu){
+      for(j in dishArray){
+        if(menu[i]!==0 && menu[i]==dishArray[j].id){
+          console.log(dishArray);
+          menuPrice += dishArray[j].price;
+          break;
         }
-        console.log("menuPrice ",menuPrice);
-
       }
-      
     }
+    console.log("menuPrice ",menuPrice);
     return menuPrice;
+    //$cookieStore.put('menuPrice',menuPrice),;
+    
   }
+  
 
   // Angular service needs to return an object that has all the
   // methods created in it. You can consider that this is instead

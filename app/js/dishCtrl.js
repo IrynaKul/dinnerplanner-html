@@ -4,7 +4,9 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
 	console.log("i DishCtrl",$routeParams.dishId);
 	console.log($routeParams.dishId);
 
-	$scope.numberOfGuests = Dinner.getNumberOfGuests();
+	$scope.numberOfGuests = function() {
+  return Dinner.getNumberOfGuests();
+  }
 
 	$scope.status = "Loading dish...";
 	Dinner.Dish.get({id:$routeParams.dishId},function(data){

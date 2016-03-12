@@ -25,14 +25,4 @@ dinnerPlannerApp.controller('SearchCtrl', function ($scope,Dinner) {
    });
  }
 
- //   $scope.view_dish = function(dish_id){
- //  	console.log(dish_id);
- // 	Dinner.setSelectedDish(dish_id);
- // 	Dinner.Dish.get({id:dish_id},function(data){
- // 		$scope.selectedDish= data;
- // 		Dinner.setDishArray(data);
- // 		Dinner.setDish(data);
- // 		console.log(data);
- // 	});
- // }
 });
