@@ -2,7 +2,7 @@
 	<div id='third_header'>
     <h9>My Dinner: {{getNumberOfGuests()}} people</h9>
 	  <div class="" style='float: right;'>
-	    <a ng-href="#/search" id="back-btn" type="button">Go back and edit dinner</a>
+	    <a ng-href="#/search" id="back-btn" class="button2" style="background-color: #3C3C3C;" type="button">Go back and edit dinner</a>
 	  </div>
 </div>
 <div id="food_view6" ng-repeat="id in fullMenu() track by $index">
@@ -15,7 +15,7 @@
 				{{getDish(id).instructions}}
 			</div>
 			<div id='dish_content2'>
-				<img src="{{getDish(id).image}}" height='140' style='float:left; margin-right:25px;'/>
+				<img src="{{getDish(id).image}}" class="dishcircle" style='float:left; margin-right:25px;'/>
 				<h9>{{getDish(id).title}}</h9>
 				<br/>
 				<h8>{{getDish(id).description}}</h8>

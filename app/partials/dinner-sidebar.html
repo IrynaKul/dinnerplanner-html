@@ -1,11 +1,12 @@
 <div id="side_menu">
-	<b>My dinner</b>
+	<font>My dinnner</font>
 	<br/>
-	<div>
-		Number of guests: <input type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)"/>
-		</div>
+		Number of guests:
+		<input class="input_form" type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)"/>
+		<br />
 		<br />
 	<br/>
+
 	<div id="showDish">
 		<div id="dishBtn" ng-repeat="id in fullMenu() track by $index">
 			<div ng-if="id != 0">
@@ -14,15 +15,15 @@
 				</div>
 			</div>
 		</div>
-
   	</div>
+  	
   	<hr class="style"/>
   	<div id="totalPrice">{{getNumberOfGuests()*totalMenuPrice()}} SEK</div>
   	<br/>
   	<br/>
   	<center>
  		<a ng-href="#/overview">
-    		<button id="confirmDinnerBtn">Confirm dinner</button>
+    		<button id="confirmDinnerBtn" class="button2">Confirm dinner</button>
     	</a>
   	</center>
 </div>

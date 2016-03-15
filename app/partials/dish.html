@@ -1,10 +1,16 @@
+<div id="first_header">
+	<h7>Homelette</h7>
+	<br>
+	<h8>Fucking finally a nice looking site</h8>
+</div>
+
 <!-- We include the sidebar as it is shared across two screens. -->
 <ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 
 <!-- TODO in Lab 5: Display the dish information including image, Description, 
 Instructions, Ingredients and total cost. -->
 <div style="height: 85vh;">
-	<div id="ingridients_box">
+	<div id="ingridients_box" style="margin-top: 15px;">
 		<div id="numberOfGuests_view4"><h9>Ingredients for {{numberOfGuests()}} people</h9></div>
 		<table id="ingredients_view4">
 			<tr ng-repeat="ingredient in selectedDish.Ingredients">
@@ -16,38 +22,24 @@ Instructions, Ingredients and total cost. -->
 			</tr>
 		</table>
 		<hr class="style"/>
-		<!-- <div ng-controller="DinnerCtrl"> -->
-	
-
-		<button ng-click="addDishToMenu(selectedDish.RecipeID)" ng-controller="DinnerCtrl" type="button">Confirm Dish</button>
-		<!-- </div> -->
+		<div ng-controller="DinnerCtrl">
+			<button class="button2" ng-click="addDishToMenu(selectedDish.RecipeID)" type="button">Confirm Dish</button>
+		</div>
 		<div id="total_price_view4" style='float: right;'>{{numberOfGuests()*dishPrice(selectedDish.RecipeID)}}</div>
 	</div>
 
 	<div id="selected_dish" style="background-color:white; padding:15px; padding-left:40px;">
-		<div id="show_dish">
-			<h9>{{selectedDish.Title}}</h9>
-			<img ng-src="{{selectedDish.ImageURL}}" height='240' width='240'/>
+		<h9>{{selectedDish.Title}}</h9>
+		<img class="dishcircle" style="width: 300px; height: 300px; -moz-border-radius: 150px; -webkit-border-radius: 150px;border-radius: 150px;" ng-src="{{selectedDish.ImageURL}}"/>
+		<div id='dish_description'>{{selectedDish.Description}}</div>
+		<br/>
+		<br/>
+		<div id="preperation">
+			<h9>Preperation</h9>
 			<br/>
-			<div id='dish_description'>{{selectedDish.Description}}</div>
+			{{selectedDish.Instructions}}
 		</div>
 		<br/>
-		<br/>
-		<h9>Preperation</h9>
-		<br/>
-		<div id="preperation">{{selectedDish.Instructions}}</div>
-	
-		<a ng-href="#/search">
-			<button id="back-btn" type="button">Back to Select Dish</button>
-		</a>
+		<a class="button2" ng-href="#/search" id="back-btn" type="button">Back to Select Dish</a>
 	</div>
 </div>
-
-<!-- 
-	<div>
-		<ul>
-			<img height="180px" width="180px" ng-src="{{dish.ImageURL}}"/>
-			{{dish.Title}}
-			</li>
-		</ul>
-	</div> -->

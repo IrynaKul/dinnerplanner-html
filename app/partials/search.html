@@ -1,29 +1,36 @@
+<div id="first_header">
+	<h7>Homelette</h7>
+	<br>
+	<h8>Fucking finally a nice looking site</h8>
+</div>
+
+<div id="second_header" style="padding-left: 300px">
+	<input type="button" class="button3" ng-click="search('Appetizers')" value="Starter"></input>
+	<input type="button" class="button3" ng-click="search('Main Dish')" value="Main Dish"></input>
+	<input type="button" class="button3" ng-click="search('Desserts')" value="Dessert"></input>
+	<!-- <hr class="style"/> -->
+	<!--<form>-->
+	<div id="search_div" style="position: relative; float: right;">
+		<b>Search dish</b>
+		<input class="input_form" style="width: 150px;" ng-model="query"/>
+		<button ng-click="search(query)" class="button2" style="padding-top: 3px; padding-bottom: 3px;">Find</button>
+	</div>
+</div>
+
 <!-- We include the sidebar as it is shared across two screens. -->
 <ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 <!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
 not support it in free version) and list all the dishes that match the search. -->
 
-<div id="second_header">
-	<b>Select dish</b>
-	<hr class="style"/>
-	<!--<form>-->
-	<input ng-model="query"/>
-	<button ng-click="search(query)">Find</button>
-	{{status}}
-	<input type="button" ng-click="search('Appetizers')" value="Starter"></input>
-	<input type="button" ng-click="search('Main Dish')" value="Main Dish"></input>
-	<input type="button" ng-click="search('Desserts')" value="Dessert"></input>
-</div>
 <center>
+	{{status}}
     <div id="view3">
-		<div id="food_view3" >
-			<div ng-repeat="dish in dishes">
-				<a ng-href="#/dish/{{dish.RecipeID}}" type="button">
-					<img ng-src="{{dish.ImageURL}}" height='140' width='140' />
-					<div id='food_name'>{{dish.Title}}</div>
-					<div id='extra'>{{dish.Category}} {{dish.Subcategory}}</div>
-				</a>
-			</div>
+		<div class="dish_display" ng-repeat="dish in dishes">
+			<a ng-href="#/dish/{{dish.RecipeID}}" type="button">
+				<img class="dishcircle" ng-src="{{dish.ImageURL}}"/>
+				<div id='food_name'>{{dish.Title}}</div>
+				<div id='extra'>{{dish.Category}} {{dish.Subcategory}}</div>
+			</a>
 		</div>
 	</div>
 </center>
